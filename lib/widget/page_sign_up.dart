@@ -42,7 +42,6 @@ class SignUpPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              obscureText: true,
               controller: displayNameController,
               keyboardType: TextInputType.name,
               decoration: InputDecoration(

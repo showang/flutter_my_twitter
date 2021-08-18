@@ -105,22 +105,28 @@ class _MyHomePageState extends State<MyHomePage> {
           }
 
           final data = snapshot.requireData;
-          return ListView.separated(
-            itemCount: data.size,
-            separatorBuilder: (context, index) => const Divider(),
-            itemBuilder: (context, index) {
-              return InkWell(
-                child: TweetItem(data.docs[index].data()),
-                onLongPress: () {
-                  Navigator.of(context).push(CupertinoPageRoute(
-                    fullscreenDialog: true,
-                    builder: (context) =>
-                        TweetMessagePage(tweetData: data.docs[index].data()),
-                  ));
-                },
-              );
-            },
-          );
+          final isEmpty = data.size == 0;
+
+          return isEmpty
+              ? Container(
+                  child: Center(child: Text("Empty tweet message.")),
+                )
+              : ListView.separated(
+                  itemCount: data.size,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      child: TweetItem(data.docs[index].data()),
+                      onLongPress: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                          fullscreenDialog: true,
+                          builder: (context) => TweetMessagePage(
+                              tweetData: data.docs[index].data()),
+                        ));
+                      },
+                    );
+                  },
+                );
         });
   }
 }

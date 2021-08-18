@@ -64,6 +64,10 @@ class LoginPageState extends State<StatefulWidget> {
                       if (user != null) {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => MyHomePage()));
+                      } else {
+                        setState(() {
+                          isProgressing = false;
+                        });
                       }
                     });
                     setState(() {
